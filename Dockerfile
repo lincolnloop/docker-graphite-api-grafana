@@ -32,4 +32,4 @@ EXPOSE 8000
 # Add --disable-sendfile
 CMD uwsgi --module=graphite_api.app:app --http=:8000 \
           --processes=2 --thunder-lock --enable-threads --master \
-          --check-static=/grafana --static-index=index.html
+          --offload-threads=4 --check-static=/grafana --static-index=index.html
