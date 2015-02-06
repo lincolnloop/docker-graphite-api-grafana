@@ -1,4 +1,15 @@
-whisper:
-    directories:
-        - /opt/graphite/storage/whisper
+finders:
+  - graphite_influxdb.InfluxdbFinder
+influxdb:
+   host: influxdb
+   port: 8086
+   user: graphite
+   pass: graphite
+   db:   graphite
+   ssl: false
+   schema:
+     - ['', 60]
+cache:
+    type: 'filesystem'
+    dir: '/tmp/graphite-api-cache'
 timezone: UTC

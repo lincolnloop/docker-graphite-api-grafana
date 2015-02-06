@@ -1,6 +1,6 @@
 FROM debian:jessie
 
-ENV GRAPHITE_API_VERSION 1.0.1
+ENV GRAPHITE_API_VERSION 97f48ba73f
 ENV GRAFANA_VERSION 1.9.1
 
 VOLUME /srv/graphite
@@ -17,7 +17,8 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
 
 RUN apt-get install -y wget build-essential python-dev libffi-dev libcairo2-dev python-pip
 RUN pip install -U pip
-RUN pip install uwsgi graphite-api[sentry]==${GRAPHITE_API_VERSION}
+RUN pip install uwsgi raven[flask] Flask-Cache graphite_influxdb \
+                https://github.com/brutasse/graphite-api/archive/${GRAPHITE_API_VERSION}.zip
 
 RUN wget -qO- http://grafanarel.s3.amazonaws.com/grafana-${GRAFANA_VERSION}.tar.gz \
     | tar xvzf - && mv grafana-${GRAFANA_VERSION} grafana
